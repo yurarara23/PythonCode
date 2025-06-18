@@ -2,6 +2,7 @@ import pyvisa
 import time
 import numpy as np
 
+#WF1973
 rm = pyvisa.ResourceManager()
 fg_addr = "GPIB::2::INSTR"
 fg = rm.open_resource(fg_addr)

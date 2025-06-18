@@ -7,8 +7,8 @@ import csv
 def get_voltage(freq):
     function_generator.write(f"FREQ {freq}")
     time.sleep(2)
-    measurement_device.write("MEAS:VOLT?")
-    response = measurement_device.read()
+    dmm.write("MEAS:VOLT?")
+    response = dmm.read()
 
     try:
         voltage = float(response.strip())
@@ -21,8 +21,8 @@ def get_voltage(freq):
 # GPIB初期化
 rm = pyvisa.ResourceManager()
 function_generator = rm.open_resource('GPIB::2::INSTR')
-measurement_device = rm.open_resource('GPIB::9::INSTR')
-measurement_device.timeout = 5000
+dmm = rm.open_resource('GPIB::9::INSTR')
+dmm.timeout = 5000
 
 # ファンクションジェネレータ初期設定
 function_generator.write("FUNC SIN")
@@ -31,7 +31,7 @@ function_generator.write("FREQ 100")
 function_generator.write("OUTP ON")
 
 # 電圧測定モードに設定
-measurement_device.write("FUNC 'VOLT:AC'")  # 正しいコマンドに要調整
+dmm.write("FUNC 'VOLT:AC'")  # 正しいコマンドに要調整
 time.sleep(0.1)
 
 # 周波数スイープ準備
@@ -69,7 +69,7 @@ with open('3.csv', 'w', newline='') as csvfile:
         plt.pause(0.01)
 
 # 後始末
-measurement_device.close()
+dmm.close()
 function_generator.close()
 rm.close()
 

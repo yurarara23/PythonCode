@@ -18,8 +18,8 @@ def get_voltage(freq):
     fg.write(f"FREQ {freq}")
     time.sleep(2)
 
-    meter.write("MEAS:VOLT?")
-    response = meter.read()
+    dmm.write("MEAS:VOLT?")
+    response = dmm.read()
 
     try:
         voltage = float(response.strip())
@@ -32,11 +32,11 @@ def get_voltage(freq):
 # VISA機器初期化
 rm = pyvisa.ResourceManager()
 fg_addr = 'GPIB::2::INSTR'
-meter_addr = 'GPIB::9::INSTR'
+dmm_addr = 'GPIB::9::INSTR'
 
 fg = rm.open_resource(fg_addr)
-meter = rm.open_resource(meter_addr)
-meter.timeout = 5000
+dmm = rm.open_resource(dmm_addr)
+dmm.timeout = 5000
 
 # 波形・出力設定
 fg.write(":FUNC SIN")
@@ -44,7 +44,7 @@ fg.write("VOLT 2")
 fg.write("FREQ 100")
 fg.write("OUTP ON")
 
-meter.write("MAIN:FUNC ACV")
+dmm.write("MAIN:FUNC ACV")
 time.sleep(0.1)
 
 # 測定準備
@@ -87,7 +87,7 @@ with open('4.csv', 'w', newline='') as f:
         writer.writerow([f, vm, vt])
 
 # クローズ処理
-meter.close()
+dmm.close()
 fg.close()
 rm.close()
 
