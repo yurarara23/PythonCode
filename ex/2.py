@@ -13,7 +13,7 @@ fg.write("VOLT 2.0")
 fg.write("FREQ 100")
 fg.write("OUTP ON")
 
-time.sleep(2)
+time.sleep(5)
 
 # 周波数スイープ（100 Hz ～ 100 kHz）
 frequencies = np.logspace(2, 5, 16)  # 10^2 ～ 10^5 Hz
@@ -21,7 +21,7 @@ frequencies = np.logspace(2, 5, 16)  # 10^2 ～ 10^5 Hz
 for f in frequencies:
     print(f"Setting frequency to {f:.1f} Hz")
     fg.write(f"FREQ {f}")
-    time.sleep(0.5)  # 安定化待ち（機器によって調整）
+    time.sleep(10)  # 保持
 
 # 終了処理
 fg.write("OUTP OFF")
