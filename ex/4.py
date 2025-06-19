@@ -40,11 +40,11 @@ dmm.timeout = 5000
 
 # 波形・出力設定
 fg.write(":FUNC SIN")
-fg.write("VOLT 2")
-fg.write("FREQ 100")
-fg.write("OUTP ON")
+fg.write(":VOLT 2")
+fg.write(":FREQ 100")
+fg.write(":OUTP ON")
 
-dmm.write("MAIN:FUNC ACV")
+dmm.write(":MAIN:FUNC ACV")
 time.sleep(0.1)
 
 # 測定準備

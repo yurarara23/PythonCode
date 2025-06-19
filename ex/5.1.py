@@ -11,7 +11,7 @@ dmm = rm.open_resource('GPIB::9::INSTR')
 dmm.write(':MAIN:FUNC VOLT:DCV')
 dmm.write(':VOLT:DCV:RANG 5')
 
-# 電源装置初期化
+# 電源装置初期化 GPD-4303
 psu = rm.open_resource('ASRL10::INSTR')
 psu.write('TRACK0')
 psu.write('VSET1:0')

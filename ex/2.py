@@ -8,10 +8,10 @@ fg_addr = "GPIB::2::INSTR"
 fg = rm.open_resource(fg_addr)
 
 # 初期設定
-fg.write(":MAIN::FUNC SINE")
-fg.write("MAIN:VOLT 2.0")
-fg.write("MAIN:FREQ 100")
-fg.write("MAIN:OUTP ON")
+fg.write(":MAIN:FUNC SINE")
+fg.write(":MAIN:VOLT 2.0")
+fg.write(":MAIN:FREQ 100")
+fg.write(":MAIN:OUTP ON")
 
 time.sleep(5)
 
