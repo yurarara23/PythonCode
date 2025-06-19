@@ -25,13 +25,13 @@ dmm = rm.open_resource('GPIB::9::INSTR')
 dmm.timeout = 5000
 
 # ファンクションジェネレータ初期設定
-function_generator.write("FUNC SIN")
-function_generator.write("VOLT 2")
-function_generator.write("FREQ 100")
-function_generator.write("OUTP ON")
+function_generator.write(":FUNC SIN")
+function_generator.write(":VOLT 2")
+function_generator.write(":FREQ 100")
+function_generator.write(":OUTP ON")
 
 # 電圧測定モードに設定
-dmm.write("FUNC 'VOLT:AC'")  # 正しいコマンドに要調整
+dmm.write("MAIN:FUNC ACV")  # 正しいコマンドに要調整
 time.sleep(0.1)
 
 # 周波数スイープ準備

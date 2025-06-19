@@ -8,10 +8,10 @@ fg_addr = "GPIB::2::INSTR"
 fg = rm.open_resource(fg_addr)
 
 # 初期設定
-fg.write("FUNC SIN")
-fg.write("VOLT 2.0")
-fg.write("FREQ 100")
-fg.write("OUTP ON")
+fg.write(":MAIN::FUNC SINE")
+fg.write("MAIN:VOLT 2.0")
+fg.write("MAIN:FREQ 100")
+fg.write("MAIN:OUTP ON")
 
 time.sleep(5)
 
@@ -20,7 +20,7 @@ frequencies = np.logspace(2, 5, 16)  # 10^2 ～ 10^5 Hz
 
 for f in frequencies:
     print(f"Setting frequency to {f:.1f} Hz")
-    fg.write(f"FREQ {f}")
+    fg.write(f":FREQ {f}")
     time.sleep(10)  # 保持
 
 # 終了処理

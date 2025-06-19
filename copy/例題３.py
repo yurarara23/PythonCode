@@ -24,9 +24,9 @@ function_generator_address = 'GPIB::2::INSTR'
 funciton_generator = rm.open_resource(function_generator_address)
 
 function_generator.write(":FUNC SIN")
-function_generator.write("VOLT 2")   
-function_generator.write("FREQ 100")
-function_generator.write("OUTP ON")
+function_generator.write(":VOLT 2")
+function_generator.write(":FREQ 100")
+function_generator.write(":OUTP ON")
 
 measurement_device_address = 'GPIB::9::INSTR'
 measurement_device = rm.open_resource(measurement_device_address)
