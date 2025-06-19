@@ -7,8 +7,9 @@ import csv
 def get_voltage(fq):
     function_generator.write(f"FREQ {fq}")
     time.sleep(2)
-    mesurement_deevice.write("MEAS:VOLT?")
-    response = mesurement_deevice.read()
+    measurement_device.write("MEAS:VOLT?")
+    response = measurement_device.read()
+
 
     try:
         voltage_str = response.split(',')[3]
@@ -21,7 +22,8 @@ def get_voltage(fq):
 
 rm = pyvisa.ResourceManager()
 function_generator_address = 'GPIB::2::INSTR'
-funciton_generator = rm.open_resource(function_generator_address)
+function_generator = rm.open_resource(function_generator_address)
+
 
 function_generator.write(":FUNC SIN")
 function_generator.write(":VOLT 2")
@@ -50,7 +52,8 @@ ax.set_title('Voltage vs Frequency')
 for freq in frequencies:
     voltage = get_voltage(freq)
     print(f"Frequency: {freq} Hz, Voltage: {voltage} V")
-    voltage.append(voltage)
+    voltages.append(voltage)
+
 
     line.set_ydata(voltages)
     line.set_xdata(frequencies[:len(voltages)])
@@ -66,8 +69,7 @@ for freq in frequencies:
         for f,v in zip(frequencies, voltages):
             csvwriter.writerow([f, v])
 
-
-measurement_device.clse()
+measurement_device.close()
 function_generator.close()
 rm.close()
 

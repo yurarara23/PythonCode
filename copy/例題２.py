@@ -7,10 +7,10 @@ rm = pyvisa.ResourceManager()
 function_generator_address = "GPIB::2::INSTR"
 function_generator = rm.open_resource(function_generator_address)
 
-function_generator.write(':MAIN::FUNC SINE')
-function_generator.write(':MAIN::VOLT 2.0')
-function_generator.write(':MAIN::FREQ 100')
-function_generator.write(':MAIN::OUTP ON')
+function_generator.write(':MAIN:FUNC SINE')
+function_generator.write(':MAIN:VOLT 2.0')
+function_generator.write(':MAIN:FREQ 100')
+function_generator.write(':MAIN:OUTP ON')
 
 time.sleep(5) 
 

@@ -32,18 +32,18 @@ def get_voltage(fq):
 
 rm = pyvisa.ResourceManager()
 function_generator_address = 'GPIB::2::INSTR'  
-mesurement_device_address = 'GPIB::9::INSTR'
+measurement_device_address = 'GPIB::9::INSTR'
 
 function_generator = rm.open_resource(function_generator_address)
-measurement_device = rm.open_resource(mesurement_device_address)
+measurement_device = rm.open_resource(measurement_device_address)
 measurement_device.timeout = 5000
 
 function_generator.write(":FUNC SIN")
-function_generator.write("VOLT 2")      
-function_generator.write("FREQ 100")
-function_generator.write("OUTP ON")
+function_generator.write(":VOLT 2")
+function_generator.write(":FREQ 100")
+function_generator.write(":OUTP ON")
 
-measurement_device.write("MAIN:FUNC ACV")
+measurement_device.write(":MAIN:FUNC ACV")
 time.sleep(0.1)
 
 frequencies = np.logspace(2, 5, 31)
@@ -62,6 +62,7 @@ ax.legend()
 
 for freq in frequencies:
     voltage = get_voltage(freq)
+    voltages.append(voltage) 
     theoretical_voltage = calculate_voltage(freq)
     theoretical_voltages.append(theoretical_voltage)
 
